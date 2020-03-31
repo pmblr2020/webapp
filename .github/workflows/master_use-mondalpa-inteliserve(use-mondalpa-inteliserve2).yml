@@ -1,0 +1,33 @@
+# Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
+# More GitHub Actions for Azure: https://github.com/Azure/actions
+
+name: Build and deploy Python app to Azure Web App - use-mondalpa-inteliserve(use-mondalpa-inteliserve2)
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@master
+
+    - name: Set up Python version
+      uses: actions/setup-python@v1
+      with:
+        python-version: '3.6'
+
+    - name: Build using AppService-Build
+      uses: azure/appservice-build@v1
+      with:
+        platform: python
+
+    - name: 'Deploy to Azure Web App'
+      uses: azure/webapps-deploy@v1
+      with:
+        app-name: 'use-mondalpa-inteliserve(use-mondalpa-inteliserve2)'
+        slot-name: 'use-mondalpa-inteliserve2'
+        publish-profile: ${{ secrets.AzureAppService_PublishProfile_3cec02865c7d49a490169a01f715701f }}
